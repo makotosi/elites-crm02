@@ -44,7 +44,8 @@ class CustomersController < ApplicationController
     params.require(:customer).permit(
       :family_name,
       :given_name,
-      :email
+      :email,
+      :campany_id
     )
   end
 
