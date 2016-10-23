@@ -45,7 +45,8 @@ class CustomersController < ApplicationController
       :family_name,
       :given_name,
       :email,
-      :campany_id
+      :campany_id,
+      :post_id
     )
   end
 
