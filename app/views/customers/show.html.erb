@@ -17,6 +17,7 @@
     <h2>対応履歴</h2>
     <% @comments.each do |comment| %>
       <div class="media">
+      <%= image_tag(comment.user.image_url, :size => "32x32", :alt => "アイコン", :style => "float: left;") %>
         <div class="media-body">
           <%= simple_format(comment.body) %>
           <p class="text-muted">
@@ -60,6 +61,7 @@
         <%= f.text_area :body, class: "form-control" %>
       </div>
       <%= f.hidden_field :customer_id, value: @customer.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.submit class: "btn btn-default" %>
     <% end %>
   </div>
