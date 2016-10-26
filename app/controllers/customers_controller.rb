@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_params, only: [:edit, :update, :show, :destroy]
+  before_action :find_customers, only: [:edit, :update, :show, :destroy]
 
   def index
     @q = Customer.search(params[:q])
@@ -52,7 +52,7 @@ class CustomersController < ApplicationController
     )
   end
 
-  def find_params
+  def find_customers
     @customer = Customer.find(params[:id])
   end
 
