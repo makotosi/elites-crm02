@@ -17,6 +17,7 @@
     <h2>対応履歴</h2>
     <% @comments.each do |comment| %>
       <div class="media">
+      <%= image_tag(comment.user.image_url, :size => "32x32", :alt => "アイコン", :style => "float: left;") %>
         <div class="media-body">
           <%= simple_format(comment.body) %>
           <p class="text-muted">
@@ -26,12 +27,41 @@
         </div>
       </div>
     <% end %>
+
+    <% if @comment.errors.any? %>
+    <div class="alert alert-danger">
+      <p><b><%= @comment.errors.count %>件のエラーがあります</b></p>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <% if @customer.errors.any? %>
+    <div class="alert alert-danger">
+      <p><b><%= @customer.errors.count %>件のエラーがあります</b></p>
+
+      <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= image_tag(current_user.image_url, :size => "32x32", :alt => "アイコン") %>
+
     <%= form_for(@comment, url: { controller: :comments, action: :create }) do |f| %>
       <div class="form-group">
         <%= f.label :body , '対応内容' %><br>
         <%= f.text_area :body, class: "form-control" %>
       </div>
       <%= f.hidden_field :customer_id, value: @customer.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.submit class: "btn btn-default" %>
     <% end %>
   </div>
